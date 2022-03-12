@@ -7,8 +7,6 @@ import (
 	"zscrub/checklists-api/structure"
 )
 
-
-
 func read_grocery_data() []structure.Grocery_checklist {
 	content, _ := ioutil.ReadFile("./data.json")
 
