@@ -1,0 +1,22 @@
+[
+    {
+        "ID": 1, 
+        "Item": "Bacon", 
+        "Status": true, 
+        "Quantity": 1
+    },
+
+    {
+        "ID": 2, 
+        "Item": "Milk", 
+        "Status": false, 
+        "Quantity": 1
+    },
+
+    {
+        "ID": 3, 
+        "Item": "Eggs", 
+        "Status": false, 
+        "Quantity": 1
+    }
+]
