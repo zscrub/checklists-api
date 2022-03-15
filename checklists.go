@@ -1,21 +1,14 @@
 package main
 
 import (
-	"encoding/json"
-	"io/ioutil"
-	"log"
+
 	"zscrub/checklists-api/structure"
 )
 
-func read_grocery_data() []structure.Grocery_checklist {
-	content, _ := ioutil.ReadFile("./data.json")
+func read_grocery_data() []structure.GroceryChecklist {
 
-	var data []structure.Grocery_checklist
-	err := json.Unmarshal(content, &data)
+	var data []structure.GroceryChecklist
 
-	if err != nil {
-		log.Fatal("Error when opening file: ", err)
-	}
 
 	return data
 }
