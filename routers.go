@@ -9,7 +9,7 @@ import (
 
 // get_groceries responds with the grocery list
 func get_groceries(c *gin.Context) {
-	data, err := init_db()
+	data, err := go_get_groceries()
 	if err != nil {
 		log.Println(err)
 		c.IndentedJSON(http.StatusBadRequest, err)
