@@ -11,7 +11,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-
 // get_groceries responds with the grocery list
 func get_groceries(c *gin.Context) {
 	data, err := go_get_groceries()

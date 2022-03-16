@@ -36,8 +36,8 @@ func go_post_groceries(groceries []structure.GroceryChecklist) (int, error) {
 
 	for _, obj := range groceries {
 		result, err := db.Exec("insert into groceries (Item, Status, Quantity) VALUES (?, ?, ?)", obj.Item, obj.Status, obj.Quantity)
-		
-		// need to use proper response code 
+
+		// need to use proper response code
 		if err != nil {
 			return 418, err
 		}
