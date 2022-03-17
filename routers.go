@@ -36,13 +36,13 @@ func post_groceries(c *gin.Context) {
 
 	fmt.Println(data)
 
-	status, err := go_post_groceries(data)
+	err = go_post_groceries(data)
 	if err != nil {
 		log.Println(err)
 		c.IndentedJSON(http.StatusBadRequest, err)
 	}
 
-	c.IndentedJSON(http.StatusAccepted, status)
+	c.IndentedJSON(http.StatusCreated, data)
 }
 
 func run_routes() {

@@ -32,16 +32,28 @@ func go_get_groceries() ([]structure.GroceryChecklist, error) {
 }
 
 // in one API call, loop over multiple groceries to insert statement/execute n queries
-func go_post_groceries(groceries []structure.GroceryChecklist) (int, error) {
+func go_post_groceries(groceries []structure.GroceryChecklist) error {
 
-	for _, obj := range groceries {
-		result, err := db.Exec("insert into groceries (Item, Status, Quantity) VALUES (?, ?, ?)", obj.Item, obj.Status, obj.Quantity)
+	query_insert := "insert into groceries (Item, Status, Quantity) VALUES "
+	params := []interface{}{}
+	for i, obj := range groceries {
+		p1 := i * 3
 
-		// need to use proper response code
-		if err != nil {
-			return 418, err
-		}
-		fmt.Println(result)
+		query_insert += fmt.Sprintf("($%d,$%d,$%d),", p1, p1+1, p1+2)
+
+		params = append(params, obj.Item, obj.Status, obj.Quantity)
 	}
-	return 201, nil
+	query_insert = query_insert[:len(query_insert)-1]
+
+	fmt.Println(query_insert)
+	fmt.Println(params)
+
+	result, err := db.Exec(query_insert, params...)
+	if err != nil {
+		return err
+	}
+
+	fmt.Println(result)
+
+	return nil
 }
