@@ -5,4 +5,5 @@ type GroceryChecklist struct {
 	Item     string `json:"item"`
 	Status   int    `json:"status"`
 	Quantity int    `json:"quantity"`
+	Priority int	`json:"priority"`
 }
