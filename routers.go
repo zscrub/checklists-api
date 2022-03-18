@@ -39,16 +39,42 @@ func post_groceries(c *gin.Context) {
 	err = go_post_groceries(data)
 	if err != nil {
 		log.Println(err)
-		c.IndentedJSON(http.StatusBadRequest, err)
+		c.IndentedJSON(http.StatusConflict, err)
 	}
 
 	c.IndentedJSON(http.StatusCreated, data)
 }
 
+func delete_groceries(c *gin.Context) {
+	byte_arr, err := ioutil.ReadAll(c.Request.Body)
+	if err != nil {
+		log.Println(err)
+		c.IndentedJSON(http.StatusBadRequest, err)
+	}
+
+	var data []int
+
+	err = json.Unmarshal(byte_arr, &data)
+	if err != nil {
+		log.Println(err)
+	}
+
+	err = go_delete_groceries(data)
+	if err != nil {
+		log.Println(err)
+		c.IndentedJSON(http.StatusConflict, err)
+	}
+
+	
+
+	c.IndentedJSON(http.StatusAccepted, data)
+}
+
 func run_routes() {
 	router := gin.Default()
 	router.GET("/groceries", get_groceries)
-
 	router.POST("/groceries", post_groceries)
+	router.DELETE("/groceries", delete_groceries)
+
 	router.Run("localhost:8080")
 }

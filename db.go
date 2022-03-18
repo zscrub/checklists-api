@@ -27,7 +27,6 @@ func go_get_groceries() ([]structure.GroceryChecklist, error) {
 	}
 
 	fmt.Println(data)
-
 	return data, nil
 }
 
@@ -49,6 +48,26 @@ func go_post_groceries(groceries []structure.GroceryChecklist) error {
 	fmt.Println(params)
 
 	result, err := db.Exec(query_insert, params...)
+	if err != nil {
+		return err
+	}
+
+	fmt.Println(result)
+
+	return nil
+}
+
+func go_delete_groceries(id_arr []int) error {
+
+	query_delete := "delete from groceries where id in ("
+
+	for _, id := range id_arr {
+		query_delete += fmt.Sprintf("%d,",id)
+	}
+	query_delete = query_delete[:len(query_delete)-1]
+	query_delete += ")"
+
+	result, err := db.Exec(query_delete)
 	if err != nil {
 		return err
 	}
